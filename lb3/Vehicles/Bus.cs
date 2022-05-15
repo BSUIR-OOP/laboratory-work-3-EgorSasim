@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace lb3.Vehicles
 {
-    internal class Train:Transport
+    internal class Bus:Transport
     {
         public override string move()
         {
-            return $"The train moves with the speed: {speed}";
+            return $"The bus moves with the speed: {speed}";
         }
-        public Train(double speed, string name, int id, double power, int places)
+        public Bus(double speed, string name, int id, double power, int places)
         {
             this.speed = speed;
             this.name = name;
