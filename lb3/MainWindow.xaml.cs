@@ -156,17 +156,20 @@ namespace lb3
         public void createObjFromString(string type, string speed, string name, string id, string power, string places)
         {
 
-            
+
             //if( String.IsNullOrEmpty(type) || Logic.checkEmpty(speed, name, id, power, places) )
             //{
             //    return;
             //}
-
-
-            double _speed = Convert.ToDouble(speed);
-            int _id        = Convert.ToInt32(id);
-            double _power = Convert.ToDouble(power);
-            int _places    = Convert.ToInt32(places);
+            double _speed, _power;
+            int _id, _places;
+            
+            _speed = Convert.ToDouble(speed);
+            _id = Convert.ToInt32(id);
+            _power = Convert.ToDouble(power);
+            _places = Convert.ToInt32(places);
+           
+            
 
 
             switch (type)
@@ -235,6 +238,61 @@ namespace lb3
             {
                 Console.Write(exp.Message);
             }
+        }
+
+        private void btnRmSelected_Click(object sender, RoutedEventArgs e)
+        {
+            int selected_index = lstBoxVehicles.SelectedIndex;
+            if(selected_index == -1)
+            {
+                MessageBox.Show("Please, choose the element to remove");
+                return;
+            }
+            vehicles.RemoveAt(selected_index);
+            showVehicles();
+        }
+
+        private void btnChngSelected_Click(object sender, RoutedEventArgs e)
+        {
+
+            int selected_index = lstBoxVehicles.SelectedIndex;
+            if (selected_index == -1)
+            {
+                MessageBox.Show("Please, choose the element to change");
+                return;
+            }
+
+            
+
+            var el = vehicles.ElementAt(selected_index);
+            switch (el.ToString())
+            {
+                case "lb3.Vehicles.Boat":
+                    cmbBoxSelectVehicle.SelectedIndex = (int)vehType.BOAT;
+                    break;
+                case "lb3.Vehicles.Bus":
+                    cmbBoxSelectVehicle.SelectedIndex = (int)vehType.BUS;
+                    break;
+                case "lb3.Vehicles.Car":
+                    cmbBoxSelectVehicle.SelectedIndex = (int)vehType.CAR;
+                    break;
+                case "lb3.Vehicles.Plane":
+                    cmbBoxSelectVehicle.SelectedIndex = (int)vehType.PLANE;
+                    break;
+                case "lb3.Vehicles.Train":
+                    cmbBoxSelectVehicle.SelectedIndex = (int)vehType.TRAIN;
+                    break;
+                default:
+                    MessageBox.Show("Oops, smth out of order...");
+                    break;
+            }
+            vehSpeed.Text = el.speed.ToString();
+            vehName.Text  = el.name;
+            vehId.Text    = el.id.ToString();
+            vehPower.Text = el.power.ToString();
+            vehPlaces.Text = el.places.ToString();
+
+            vehicles.RemoveAt(selected_index);
         }
     }
 }
