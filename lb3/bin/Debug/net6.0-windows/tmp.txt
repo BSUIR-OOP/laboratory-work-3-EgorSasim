@@ -1,0 +1,5 @@
+lb3.Vehicles.Boat 0 0 0 0 0
+lb3.Vehicles.Bus 0 0 0 0 0
+lb3.Vehicles.Car 0 0 0 0 0
+lb3.Vehicles.Plane 0 0 0 0 0
+lb3.Vehicles.Train 0 0 0 0 0
