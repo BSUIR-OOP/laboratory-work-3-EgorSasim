@@ -2,18 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
 using lb3.Vehicles;
 using Microsoft.Win32;
 
@@ -27,9 +16,16 @@ namespace lb3
         public MainWindow()
         {
             InitializeComponent();
+            cmbBoxSelectVehicle.Items.Add(new Boat());
+            cmbBoxSelectVehicle.Items.Add(new Bus());
+            cmbBoxSelectVehicle.Items.Add(new Car());
+            cmbBoxSelectVehicle.Items.Add(new Plane());
+            cmbBoxSelectVehicle.Items.Add(new Train());
         }
 
-        public enum vehType
+
+
+        /*public enum vehType
         {
             NOT_CHOOSEN = -1
             ,BOAT = 0
@@ -39,9 +35,8 @@ namespace lb3
             ,TRAIN
             ,VEH_END
         };
+        */
 
-
-        public string[] vehNames = new string[5]; /*{ "lb3.Vehicles.Boat", "lb3.Vehicles.BUS", "lb3.Vehicles.CAR", "lb3.Vehicles.PLANE", "lb3.Vehicles.TRAIN" };*/
 
 
         List<Transport> vehicles = new List<Transport>();
@@ -72,36 +67,38 @@ namespace lb3
                     power   = Convert.ToDouble(vehPower.Text);
                     speed   = Convert.ToDouble(vehSpeed.Text);
                     name    = vehName.Text;
-                    
 
-                    
+                    Type t = Type.GetType(cmbBoxSelectVehicle.SelectedItem.ToString());
+                    Transport transport = (Transport)Activator.CreateInstance(t, speed, name, id, power, places);
+                    vehicles.Add(transport);
 
-                    switch (cmbBoxSelectVehicle.SelectedIndex)
-                    {
-                        case (int)vehType.NOT_CHOOSEN:
-                            MessageBox.Show("Please, choose the class to create");
-                            break;
-                        case (int)vehType.BOAT:
-                            vehicles.Add(new Vehicles.Boat(speed, name, id, power, places));
-                            break;
-                        case (int)vehType.BUS:
-                            vehicles.Add(new Vehicles.Bus(speed, name, id, power, places));
-                            break;
-                        case (int)vehType.CAR:
-                            vehicles.Add(new Vehicles.Car(speed, name, id, power, places));
-                            break;
-                        case (int)vehType.PLANE:
-                            vehicles.Add(new Vehicles.Plane(speed, name, id, power, places));
-                            break;
-                        case (int)vehType.TRAIN:
-                            vehicles.Add(new Vehicles.Train(speed, name, id, power, places));
-                            break;
-                        default:
-                            MessageBox.Show("Smth goes wrong, please try again");
-                            break;
-                    }
 
-                    
+                    /* switch (cmbBoxSelectVehicle.SelectedIndex)
+                     {
+                         case (int)vehType.NOT_CHOOSEN:
+                             MessageBox.Show("Please, choose the class to create");
+                             break;
+                         case (int)vehType.BOAT:
+                             vehicles.Add(new Vehicles.Boat(speed, name, id, power, places));
+                             break;
+                         case (int)vehType.BUS:
+                             vehicles.Add(new Vehicles.Bus(speed, name, id, power, places));
+                             break;
+                         case (int)vehType.CAR:
+                             vehicles.Add(new Vehicles.Car(speed, name, id, power, places));
+                             break;
+                         case (int)vehType.PLANE:
+                             vehicles.Add(new Vehicles.Plane(speed, name, id, power, places));
+                             break;
+                         case (int)vehType.TRAIN:
+                             vehicles.Add(new Vehicles.Train(speed, name, id, power, places));
+                             break;
+                         default:
+                             MessageBox.Show("Smth goes wrong, please try again");
+                             break;
+                     } */
+
+
 
                     showVehicles();
                 }
@@ -168,11 +165,12 @@ namespace lb3
             _id = Convert.ToInt32(id);
             _power = Convert.ToDouble(power);
             _places = Convert.ToInt32(places);
-           
-            
 
+            Type t = Type.GetType(type);
+            Transport transport = (Transport)Activator.CreateInstance(t, _speed, name, _id, _power, _places);
+            vehicles.Add(transport);
 
-            switch (type)
+          /*  switch (type)
             {
                 case "lb3.Vehicles.Boat":
                     vehicles.Add(new Vehicles.Boat(_speed, name, _id, _power, _places));
@@ -191,8 +189,8 @@ namespace lb3
                     break;
                 default:
                     MessageBox.Show("Oops, smth out of order...");
-                    break;
-            }
+                    break; 
+            } */
         }
 
         private void btnSearchDeserializeFile_Click(object sender, RoutedEventArgs e)
@@ -265,7 +263,13 @@ namespace lb3
             
 
             var el = vehicles.ElementAt(selected_index);
-            switch (el.ToString())
+            foreach (var t in cmbBoxSelectVehicle.Items)
+                if (t.ToString().Equals(el.ToString()))
+                {
+                    cmbBoxSelectVehicle.SelectedItem = t;
+                    break;
+                }
+          /*  switch (el.ToString())
             {
                 case "lb3.Vehicles.Boat":
                     cmbBoxSelectVehicle.SelectedIndex = (int)vehType.BOAT;
@@ -285,7 +289,7 @@ namespace lb3
                 default:
                     MessageBox.Show("Oops, smth out of order...");
                     break;
-            }
+            } */
             vehSpeed.Text = el.speed.ToString();
             vehName.Text  = el.name;
             vehId.Text    = el.id.ToString();

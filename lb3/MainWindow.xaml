@@ -15,12 +15,8 @@
         </Grid.ColumnDefinitions>
         <StackPanel Margin="0,0,0,351">
             <Label Content="Choose vehicle"/>
-            <ComboBox x:Name="cmbBoxSelectVehicle" Margin="10,15,278,381">
-                <ComboBoxItem IsSelected="True" Content="Boat"/>
-                <ComboBoxItem Content="Bus"/>
-                <ComboBoxItem Content="Car"/>
-                <ComboBoxItem Content="Plane"/>
-                <ComboBoxItem Content="Train"/>
+            <ComboBox x:Name="cmbBoxSelectVehicle" Margin="10,15,278,381" Width="136" SelectedIndex="0">
+            
             </ComboBox>
         </StackPanel>
         <Label Content="Speed" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>

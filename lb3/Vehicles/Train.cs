@@ -12,6 +12,8 @@ namespace lb3.Vehicles
         {
             return $"The train moves with the speed: {speed}";
         }
+
+        public Train() { }
         public Train(double speed, string name, int id, double power, int places)
         {
             this.speed = speed;
