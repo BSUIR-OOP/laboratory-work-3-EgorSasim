@@ -3,6 +3,7 @@ using lb3.Vehicles;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -104,5 +105,71 @@ namespace newlb3
                 txtBoxDeserFile.Text = selectedFileName;
             }
         }
+
+        private void btnSerialize_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                using (System.IO.StreamWriter writer = new StreamWriter(txtBoxSerFile.Text))
+                {
+                    foreach (var item in vehicles)
+                    {
+                        writer.Write($"{item.ToString()} {item.speed} {item.name} {item.id} {item.power} {item.places}\n");
+                    }
+
+                    MessageBox.Show("Successfully write");
+                }
+            }
+            catch (Exception exp)
+            {
+                Console.Write(exp.Message);
+            }
+        }
+
+        private void btnDeserialize_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                string content = File.ReadAllText(txtBoxDeserFile.Text);
+                string[] objs = content.Split("\n");
+
+                vehicles.Clear();
+
+                foreach (string obj in objs)
+                {
+                    if (obj == "") continue;
+                    string[] objSpec = obj.Split(" ");
+                    createObjFromString(objSpec[0], objSpec[1], objSpec[2], objSpec[3], objSpec[4], objSpec[5]);
+                }
+
+
+                MessageBox.Show("Successfully read");
+                showVehicles();
+                //}
+            }
+            catch (Exception exp)
+            {
+                Console.Write(exp.Message);
+            }
+        }
+
+
+        public void createObjFromString(string type, string speed, string name, string id, string power, string places)
+        {
+            double _speed, _power;
+            int _id, _places;
+
+            _speed = Convert.ToDouble(speed);
+            _id = Convert.ToInt32(id);
+            _power = Convert.ToDouble(power);
+            _places = Convert.ToInt32(places);
+
+            Type t = Type.GetType(type);
+            Transport transport = (Transport)Activator.CreateInstance(t, _speed, name, _id, _power, _places);
+            vehicles.Add(transport);
+        }
+
+
+
     }
 }
