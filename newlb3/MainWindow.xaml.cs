@@ -169,7 +169,43 @@ namespace newlb3
             vehicles.Add(transport);
         }
 
+        private void btnChngSelected_Click(object sender, RoutedEventArgs e)
+        {
+            int selected_index = lstBoxVehicles.SelectedIndex;
+            if (selected_index == -1)
+            {
+                MessageBox.Show("Please, choose the element to change");
+                return;
+            }
 
 
+
+            var el = vehicles.ElementAt(selected_index);
+            foreach (var t in cmbBoxSelectVehicle.Items)
+                if (t.ToString().Equals(el.ToString()))
+                {
+                    cmbBoxSelectVehicle.SelectedItem = t;
+                    break;
+                }
+            vehSpeed.Text = el.speed.ToString();
+            vehName.Text = el.name;
+            vehId.Text = el.id.ToString();
+            vehPower.Text = el.power.ToString();
+            vehPlaces.Text = el.places.ToString();
+
+            vehicles.RemoveAt(selected_index);
+        }
+
+        private void btnRmSelected_Click(object sender, RoutedEventArgs e)
+        {
+            int selected_index = lstBoxVehicles.SelectedIndex;
+            if (selected_index == -1)
+            {
+                MessageBox.Show("Please, choose the element to remove");
+                return;
+            }
+            vehicles.RemoveAt(selected_index);
+            showVehicles();
+        }
     }
 }
