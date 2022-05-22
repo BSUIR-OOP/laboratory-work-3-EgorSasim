@@ -1,5 +1,6 @@
 ﻿using lb3;
 using lb3.Vehicles;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,6 +81,28 @@ namespace newlb3
                 MessageBox.Show("An empty fields detected!!!");
             }
 
+        }
+
+        private void btnSearchSerializeFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            if (openFileDialog1.ShowDialog() == true)
+            {
+                string selectedFileName = openFileDialog1.FileName;
+                txtBoxSerFile.Text = selectedFileName;
+            }
+        }
+
+        private void btnSearchDeserializeFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            if (openFileDialog1.ShowDialog() == true)
+            {
+                string selectedFileName = openFileDialog1.FileName;
+                txtBoxDeserFile.Text = selectedFileName;
+            }
         }
     }
 }
