@@ -7,6 +7,48 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition x:Name="Controls">
+            </ColumnDefinition>
+            <ColumnDefinition>
+            </ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Margin="0,0,0,351">
+            <Label Content="Choose vehicle"/>
+            <ComboBox x:Name="cmbBoxSelectVehicle" Margin="10,15,278,381" Width="136" SelectedIndex="0">
+
+            </ComboBox>
+        </StackPanel>
+        <Label Content="Speed" HorizontalAlignment="Left" Margin="10,91,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="vehSpeed" HorizontalAlignment="Left" Margin="10,122,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Name" HorizontalAlignment="Center" Margin="0,91,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="vehName" HorizontalAlignment="Left" Margin="178,122,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Id" HorizontalAlignment="Left" Margin="10,157,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="vehId" HorizontalAlignment="Left" Margin="10,188,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Power" HorizontalAlignment="Center" Margin="0,157,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="vehPower" HorizontalAlignment="Left" Margin="178,188,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Places" HorizontalAlignment="Left" Margin="102,233,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="vehPlaces" HorizontalAlignment="Left" Margin="102,264,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="120"/>
+
+        <Button Content="Add"  HorizontalAlignment="Left" Margin="102,306,0,0" VerticalAlignment="Top" Width="119" Click="Button_Click"/>
+
+
+        <ListBox x:Name="lstBoxVehicles" Grid.Column="1" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,175"/>
+
+        <Label Grid.Column="1" Content="File name" HorizontalAlignment="Left" Margin="10,264,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBoxSerFile"  Grid.Column="1" HorizontalAlignment="Left" Margin="10,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnSerialize" Grid.Column="1" Content="Serialize" HorizontalAlignment="Left" Margin="10,316,0,0" VerticalAlignment="Top" Width="120" Click="btnSerialize_Click"/>
+
+        <Label Grid.Column="1" Content="File name" HorizontalAlignment="Left" Margin="221,264,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtBoxDeserFile"  Grid.Column="1" HorizontalAlignment="Left" Margin="221,290,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnDeserialize" Grid.Column="1" Content="Deserialize" HorizontalAlignment="Left" Margin="221,316,0,0" VerticalAlignment="Top" Width="120" Click="btnDeserialize_Click"/>
+
+        <Button x:Name="btnChngSelected" Grid.Column="1" Content="Change selected" HorizontalAlignment="Left" Margin="10,384,0,0" VerticalAlignment="Top" Width="120" Click="btnChngSelected_Click"/>
+        <Button x:Name="btnRmSelected" Grid.Column="1" Content="Remove selected" HorizontalAlignment="Left" Margin="221,384,0,0" VerticalAlignment="Top" Width="130" Click="btnRmSelected_Click"/>
+
+        <Button x:Name="btnSearchSerializeFile" Grid.Column="1" Content="Search" HorizontalAlignment="Left" Margin="131,289,0,0" VerticalAlignment="Top" Click="btnSearchSerializeFile_Click"/>
+        <Button x:Name="btnSearchDeserializeFile" Grid.Column="1" Content="Search" HorizontalAlignment="Left" Margin="341,289,0,0" VerticalAlignment="Top" Click="btnSearchDeserializeFile_Click"/>
+
 
     </Grid>
 </Window>
